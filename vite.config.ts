@@ -1,8 +1,10 @@
 import { defineConfig } from "vite";
 import dts from "vite-plugin-dts";
+import { externalizeDeps } from "vite-plugin-externalize-deps";
 
 export default defineConfig({
   plugins: [
+    externalizeDeps(),
     dts({
       outDir: "./dist",
       include: ["./src/**.ts"],
@@ -19,8 +21,10 @@ export default defineConfig({
         "./src/markdoc-linter-extension.ts",
         "./src/liquid-completion-patch.ts",
       ],
-
       fileName: (fmt, entry_name) => `${entry_name}.mjs`,
     },
+  },
+  ssr: {
+    external: ["@codemirror/*"],
   },
 });

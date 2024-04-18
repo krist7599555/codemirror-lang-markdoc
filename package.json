@@ -19,7 +19,8 @@
     "@lezer/common": "^1.2.1",
     "@types/bun": "latest",
     "vite": "^5.2.9",
-    "vite-plugin-dts": "^3.8.3"
+    "vite-plugin-dts": "^3.8.3",
+    "vite-plugin-externalize-deps": "^0.8.0"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
