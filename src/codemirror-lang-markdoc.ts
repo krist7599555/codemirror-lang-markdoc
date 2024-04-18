@@ -1,6 +1,6 @@
 import { LanguageSupport } from "@codemirror/language";
 import { markdocLinterExtension } from "./markdoc-linter-extension";
-import type { Config } from "@markdoc/markdoc";
+import type { Config, Schema } from "@markdoc/markdoc";
 import { html } from "@codemirror/lang-html";
 import { closePercentBrace, liquid } from "@codemirror/lang-liquid";
 import {
@@ -34,7 +34,11 @@ export const markdoc = ({
       autocomplete: patch__liquidCompletionSource({
         tags: [
           ...(liquidCompletion.tags ?? []),
-          ...Object.keys(markdocConfig.tags ?? {}).map((s) => ({ label: s })),
+          ...Object.keys(markdocConfig.tags ?? {}).map((s) => ({
+            label: s,
+            info: () =>
+              schemaToDomCompletionTooltip((markdocConfig.tags ?? {})[s]),
+          })),
         ],
         variables: [
           ...(liquidCompletion.variables ?? []),
@@ -51,3 +55,29 @@ export const markdoc = ({
     markdocLinterExtension(markdocConfig),
   ]);
 };
+
+function schemaToDomCompletionTooltip(schema: Schema = {}): HTMLDivElement {
+  const div = document.createElement("div");
+  const attrs = schema.attributes ?? {};
+  div.innerHTML = Object.keys(attrs)
+    .map((k) => {
+      const a = attrs[k];
+      const type_ =
+        Array.isArray(a.matches) &&
+        a.matches.every((i) => typeof i === "string")
+          ? `(${a.matches.map((s) => JSON.stringify(s)).join(" | ")})`
+          : typeof a.type === "string"
+          ? a.type.toLowerCase()
+          : "any";
+      const require_ = a.required === true ? "" : "?";
+      const default_ =
+        typeof a.default === "string" ||
+        typeof a.default == "number" ||
+        typeof a.default === "boolean"
+          ? ` = ${JSON.stringify(a.default)}`
+          : "";
+      return `(property) <b>${k}</b>${require_}: ${type_}${default_}`;
+    })
+    .join("<br>");
+  return div;
+}
