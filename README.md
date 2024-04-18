@@ -2,6 +2,8 @@
 
 implement is extends from `liquid` and remove some functionality
 
+[github](https://github.com/krist7599555/codemirror-lang-markdoc)
+
 ## V6
 
 ```typescript

@@ -7,6 +7,10 @@
     ".": {
       "import": "./dist/index.mjs",
       "types": "./dist/index.d.ts"
+    },
+    "./v5": {
+      "import": "./dist/v5.mjs",
+      "types": "./dist/v5.d.ts"
     }
   },
   "files": [
@@ -35,5 +39,9 @@
     "@codemirror/state": "^6",
     "@codemirror/view": "^6",
     "@markdoc/markdoc": "^0.4.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/krist7599555/codemirror-lang-markdoc"
   }
 }
