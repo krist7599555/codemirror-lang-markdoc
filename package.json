@@ -1,0 +1,38 @@
+{
+  "name": "codemirror-lang-markdoc",
+  "version": "0.1.0",
+  "private": false,
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "vite build"
+  },
+  "devDependencies": {
+    "@lezer/common": "^1.2.1",
+    "@types/bun": "latest",
+    "vite": "^5.2.9",
+    "vite-plugin-dts": "^3.8.3"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@codemirror/autocomplete": "^6",
+    "@codemirror/lang-html": "^6",
+    "@codemirror/lang-liquid": "^6",
+    "@codemirror/language": "^6",
+    "@codemirror/legacy-modes": "^6",
+    "@codemirror/lint": "^6",
+    "@codemirror/state": "^6",
+    "@codemirror/view": "^6",
+    "@markdoc/markdoc": "^0.4.0"
+  }
+}
